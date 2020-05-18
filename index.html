@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS clock</title>
+</head>
+<style>
+*{margin:0;padding:0;}
+body{ background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;}
+.clock{
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    width:340px;
+    height:340px;
+    border-radius:50%;
+    border:20px solid white;
+    margin:123px auto auto auto;
+    box-shadow: 0 0 0 4px rgba(0,0,0,0.1), inset 0 0 0 3px #EFEFEF, inset 0 0 10px black, 0 0 10px rgba(0,0,0,0.2);
+}
+.hand {
+    width:44%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+      transform-origin: 100%;
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      margin-left:-74.8px;
+      margin-top:-3.515px;
+    }
+</style>
+<body>
+   <div class="clock">
+       <div class="hand hourhand"></div>
+       <div class="hand minhand"></div>
+       <div class="hand sechand"></div>
+   </div>
+    <script>
+        const sechand=document.querySelector('.sechand')
+        const minhand=document.querySelector('.minhand')
+        const hourhand=document.querySelector('.hourhand')
+
+       function setTime(){
+       const now=new Date()
+
+       const seconds=now.getSeconds()
+       sechandDeg=(seconds/60)*360+90
+       sechand.style.transform=`rotate(${sechandDeg}deg)`
+
+       const minutes=now.getMinutes()
+       minhandDeg=(minutes/60)*360+(seconds/60)*6+90
+       minhand.style.transform=`rotate(${minhandDeg}deg)`
+
+       const hours=now.getHours()
+       hourhandDeg=(hours/12)*360+(minutes/60)*30+90
+       hourhand.style.transform=`rotate(${hourhandDeg}deg)`
+}
+       setInterval(setTime,1000)
+      
+    </script>
+</body>
+</html>
